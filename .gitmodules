@@ -1,0 +1,12 @@
+[submodule "Curso-Java-Udemy-Cero-a-Experto/Calculadora-GUI-Proyecto-Java-desde-cer0"]
+	path = Curso-Java-Udemy-Cero-a-Experto/Calculadora-GUI-Proyecto-Java-desde-cer0
+	url = https://github.com/rikrd19/java-swing-desktop-calculator.git
+[submodule "Curso-Java-Udemy-Cero-a-Experto/ZonaFitSpring"]
+	path = Curso-Java-Udemy-Cero-a-Experto/ZonaFitSpring
+	url = https://github.com/rikrd19/zona-fit-springboot-jsf-primefaces-jpa-mysql.git
+[submodule "PruebaTecSupermecado"]
+	path = PruebaTecSupermecado
+	url = https://github.com/rikrd19/supermarket-api-spring-boot.git
+[submodule "Curso-Java-Udemy-Cero-a-Experto/curso-Java-con-IDE-Netbeans/Gestion-Clientes-Java-JSP-Servlets-MVC-CRUD"]
+	path = Curso-Java-Udemy-Cero-a-Experto/curso-Java-con-IDE-Netbeans/Gestion-Clientes-Java-JSP-Servlets-MVC-CRUD
+	url = https://github.com/rikrd19/Gestion-Clientes-Java-JSP-Servlets-MVC-CRUD.git

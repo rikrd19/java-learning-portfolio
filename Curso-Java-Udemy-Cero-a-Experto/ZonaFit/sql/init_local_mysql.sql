@@ -1,0 +1,17 @@
+-- Local dev schema for ZonaFit (run as root after fresh MySQL).
+-- Default credentials in Conexion.java: root / curso123, port 3306 (Homebrew MySQL).
+
+--CREATE DATABASE IF NOT EXISTS zona_fit_deb;
+--USE zona_fit_deb;
+--
+--CREATE TABLE IF NOT EXISTS cliente (
+--    id INT NOT NULL AUTO_INCREMENT,
+--    nombre VARCHAR(100) NOT NULL,
+--    apellido VARCHAR(100) NOT NULL,
+--    membresia INT NOT NULL,
+--    PRIMARY KEY (id)
+--) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+--
+--INSERT IGNORE INTO cliente (id, nombre, apellido, membresia) VALUES
+--    (1, 'Juan', 'Perez', 100),
+--    (2, 'Karla', 'Gomez', 200);
