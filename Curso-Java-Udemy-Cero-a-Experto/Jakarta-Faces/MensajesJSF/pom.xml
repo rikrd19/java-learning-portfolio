@@ -2,14 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>avilawebservices.web</groupId>
-    <artifactId>ValidadoresJSF</artifactId>
+    <artifactId>MensajesJSF</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>ValidadoresJSF</name>
+    <name>MensajesJSF</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>25</maven.compiler.release>
         <jakartaee>11.0.0-M1</jakartaee>
     </properties>
     

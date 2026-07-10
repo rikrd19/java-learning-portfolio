@@ -3,6 +3,7 @@ package avilawebservice.beans.model;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,8 @@ public class Candidato implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(Candidato.class);
     private String nombre;
     private String apellido;
-    private String salarioDeseado;
+    private int salarioDeseado;
+    private Date fechaNacimiento;
 
     public Candidato() {
         log.info("Creando el objeto Candidato");
@@ -41,13 +43,21 @@ public class Candidato implements Serializable{
         this.apellido = apellido;
     }
 
-    public String getSalarioDeseado() {
+    public int getSalarioDeseado() {
         return salarioDeseado;
     }
 
-    public void setSalarioDeseado(String salarioDeseado) {
+    public void setSalarioDeseado(int salarioDeseado) {
         log.info("Actualizando salario: "+ salarioDeseado);
         this.salarioDeseado = salarioDeseado;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
     
     
