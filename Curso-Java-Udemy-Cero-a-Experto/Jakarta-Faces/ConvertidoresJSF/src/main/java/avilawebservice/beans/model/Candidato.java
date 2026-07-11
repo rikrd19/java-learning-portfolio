@@ -17,13 +17,14 @@ public class Candidato implements Serializable{
     private String apellido;
     private int salarioDeseado;
     private Date fechaNacimiento;
+    private String codigoPostal;
+    private String colonia;
+    private String ciudad;
 
     public Candidato() {
         log.info("Creando el objeto Candidato");
         this.nombre = "Introduce tu nombre";
     }
-    
-    
 
     public String getNombre() {
         return this.nombre;
@@ -59,6 +60,28 @@ public class Candidato implements Serializable{
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-    
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 }
