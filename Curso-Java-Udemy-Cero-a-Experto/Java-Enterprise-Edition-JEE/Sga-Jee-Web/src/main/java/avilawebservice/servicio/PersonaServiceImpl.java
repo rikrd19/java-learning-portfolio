@@ -1,41 +1,46 @@
 package avilawebservice.servicio;
 
+import avilawebservice.datos.IPersonaDao;
 import avilawebservice.domain.Persona;
 import jakarta.ejb.Stateless;
-import java.util.ArrayList;
+import jakarta.inject.Inject;
 import java.util.List;
 
 @Stateless
 public class PersonaServiceImpl implements PersonaServiceRemote, IPersonaService{
 
+    @Inject
+    private IPersonaDao personaDao;
+    
+    
     @Override
     public List<Persona> listarPersonas() {
-        List<Persona> personas = new ArrayList<>();
-        personas.add(new Persona(1, "Juan", "Perez", "jperez@mail.com", "3434343434"));
-        personas.add(new Persona(2, "Martha", "Suarex", "masua@mail.com", "23232323"));
-        return personas;
+        return personaDao.findAllPersonas();
     }
 
     @Override
     public Persona encontrarPersonaPorId(Persona persona) {
-        return null;
+        return personaDao.findPersonaById(persona);
     }
 
     @Override
     public Persona encontrarPersonaPorEmail(Persona persona) {
-        return null;
+        return personaDao.findPersonaByEmail(persona);
     }
 
     @Override
     public void registrarPersona(Persona persona) {
+        personaDao.insertPersona(persona);
     }
 
     @Override
     public void modificarPersona(Persona persona) {
+        personaDao.updatePersona(persona);
     }
 
     @Override
     public void eliminarPersona(Persona persona) {
+        personaDao.deletePersona(persona);
     }
 
 }

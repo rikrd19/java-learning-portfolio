@@ -19,6 +19,37 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Jakarta Persistence API (replaces javax.persistence) -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        
+        <!-- EclipseLink JPA provider with Jakarta support (4.x) -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>4.0.4</version>
+        </dependency>
+        
+        <!-- MySQL JDBC driver -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.24.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.24.3</version>
+        </dependency>
     </dependencies>
     
     <build>

@@ -1,13 +1,29 @@
 package avilawebservice.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 
+@Entity
+@NamedQueries({
+    @NamedQuery(name="Persona.findAll", query="SELECT p FROM Persona p ORDER BY p.idPersona")
+})
+@Table(name = "persona")  // se tiene que colocar en nombre de la tabla, sino toma y crea una con el nombre de la clase
+public class Persona implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
-public class Persona implements Serializable{
-    
-    private static final Long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_persona")
     private int idPersona;
+
     private String nombre;
     private String apellido;
     private String email;
@@ -16,12 +32,7 @@ public class Persona implements Serializable{
     public Persona() {
     }
 
-    public Persona(int idPersona) {
-        this.idPersona = idPersona;
-    }
-
-    public Persona(int idPersona, String nombre, String apellido, String email, String telefono) {
-        this.idPersona = idPersona;
+    public Persona(String nombre, String apellido, String email, String telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -72,7 +83,5 @@ public class Persona implements Serializable{
     public String toString() {
         return "Persona{" + "idPersona=" + idPersona + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", telefono=" + telefono + '}';
     }
-    
-    
-}
 
+}
