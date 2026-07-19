@@ -116,22 +116,38 @@ public class PruebaJPQL {
 //            log.debug("idMin: {}, idMax: {}, count: {}", idMin, idMax, count);
 
         }
-        
+
         // 8. Cuenta los nombres de las Personas que son distintos 
         log.debug("\n\n8. Cuenta los nombres de las Personas que son distintos");
         jpql = "select count ( distinct p.nombre ) from Persona p";
         Long contador = (Long) em.createQuery(jpql).getSingleResult();
 //        log.debug("Numero de personas con nombre distinto: {}", contador);
-        
 
         // 9. Concatenar y convierte a mayusculas el nombre y apellido
         log.debug("\n\n9. Concatenar y convierte a mayusculas el nombre y apellido");
         jpql = "select CONCAT( p.nombre, ' ' , p.apellido) as Nombre from Persona p";
         nombres = em.createQuery(jpql).getResultList();
-        for (String nombreCompleto: nombres) {
-            log.debug(nombreCompleto.toUpperCase());
+        for (String nombreCompleto : nombres) {
+//            log.debug(nombreCompleto.toUpperCase());
         }
         
+        // 10. Obtiene el objeto persona con id igual al parametro proporcionado
+        log.debug("\n\n10. Obtiene el objeto persona con id igual al parametro proporcionado");
+        int idPersona = 3;
+        jpql = "select p from Persona p where p.idPersona = :id ";
+        q = em.createQuery(jpql);
+        q.setParameter("id", idPersona);
+        persona = (Persona) q.getSingleResult();
+        log.debug(persona);
+        
+        // 11. Obtiene las personas que contengan una letra a, sin importar si es mayuscula o minuscula
+        log.debug("\n\n11. Obtiene las personas que contengan una letra a, sin importar si es mayuscula o minuscula");
+        jpql = "select p from Persona p where upper(p.nombre) like upper(:parametro)";
+        String parametroString = "%a%";  // '%' caracter que se usa para la sentencia like (SQL)
+        q = em.createQuery(jpql);
+        q.setParameter("parametro", parametroString);
+        personas = q.getResultList();
+        mostrarPersonas(personas);
     }
 
     private static void mostrarPersonas(List<Persona> personas) {
