@@ -130,7 +130,7 @@ public class PruebaJPQL {
         for (String nombreCompleto : nombres) {
 //            log.debug(nombreCompleto.toUpperCase());
         }
-        
+
         // 10. Obtiene el objeto persona con id igual al parametro proporcionado
         log.debug("\n\n10. Obtiene el objeto persona con id igual al parametro proporcionado");
         int idPersona = 3;
@@ -139,7 +139,7 @@ public class PruebaJPQL {
         q.setParameter("id", idPersona);
         persona = (Persona) q.getSingleResult();
 //        log.debug(persona);
-        
+
         // 11. Obtiene las personas que contengan una letra a, sin importar si es mayuscula o minuscula
         log.debug("\n\n11. Obtiene las personas que contengan una letra a, sin importar si es mayuscula o minuscula");
         jpql = "select p from Persona p where upper(p.nombre) like upper(:parametro)";
@@ -148,28 +148,48 @@ public class PruebaJPQL {
         q.setParameter("parametro", parametroString);
         personas = q.getResultList();
 //        mostrarPersonas(personas);
-        
-        
+
         // 12. Uso de between
         log.debug("\n\n12. Uso de between");
         jpql = "select p from Persona p where p.idPersona between 1 and 5";
         personas = em.createQuery(jpql).getResultList();
 //        mostrarPersonas(personas);
-        
-        
+
         // 13. Uso del ordenamiento
         log.debug("\n\n13. Uso del ordenamiento");
         jpql = "select p from Persona p where p.idPersona > 7 order by p.nombre desc, p.apellido desc";
         personas = em.createQuery(jpql).getResultList();
-        mostrarPersonas(personas);
-        
+//        mostrarPersonas(personas);
+
+        // 14. Uso de subquery
+        log.debug("\n\n 14. Uso de subquery");
+        jpql = "select p from Persona p where p.idPersona in (select min(p1.idPersona) from Persona p1)";
+        personas = em.createQuery(jpql).getResultList();
+//        mostrarPersonas(personas);
+
+        // 15. Uso de join con lazy loading
+        log.debug("\n\n 15. Uso de join con lazy loading");
+        jpql = "select u from Usuario u join u.persona p";
+        usuarios = em.createQuery(jpql).getResultList();
+//        mostrarUsuarios(usuarios);
+
+        // 16. Uso de left join con eager loading
+        log.debug("\n\n16. Uso de left join con lazy loading");
+        jpql = "select u from Usuario u left join fetch u.persona";  // con la palabra 'fetch' se usa lazy eager
+        usuarios = em.createQuery(jpql).getResultList();
+        mostrarUsuarios(usuarios);
     }
 
-    
-    
     private static void mostrarPersonas(List<Persona> personas) {
         for (Persona p : personas) {
             log.debug(p);
+        }
+
+    }
+
+    private static void mostrarUsuarios(List<Usuario> usuarios) {
+        for (Usuario u : usuarios) {
+            log.debug(u);
         }
 
     }
