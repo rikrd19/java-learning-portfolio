@@ -138,7 +138,7 @@ public class PruebaJPQL {
         q = em.createQuery(jpql);
         q.setParameter("id", idPersona);
         persona = (Persona) q.getSingleResult();
-        log.debug(persona);
+//        log.debug(persona);
         
         // 11. Obtiene las personas que contengan una letra a, sin importar si es mayuscula o minuscula
         log.debug("\n\n11. Obtiene las personas que contengan una letra a, sin importar si es mayuscula o minuscula");
@@ -147,9 +147,26 @@ public class PruebaJPQL {
         q = em.createQuery(jpql);
         q.setParameter("parametro", parametroString);
         personas = q.getResultList();
+//        mostrarPersonas(personas);
+        
+        
+        // 12. Uso de between
+        log.debug("\n\n12. Uso de between");
+        jpql = "select p from Persona p where p.idPersona between 1 and 5";
+        personas = em.createQuery(jpql).getResultList();
+//        mostrarPersonas(personas);
+        
+        
+        // 13. Uso del ordenamiento
+        log.debug("\n\n13. Uso del ordenamiento");
+        jpql = "select p from Persona p where p.idPersona > 7 order by p.nombre desc, p.apellido desc";
+        personas = em.createQuery(jpql).getResultList();
         mostrarPersonas(personas);
+        
     }
 
+    
+    
     private static void mostrarPersonas(List<Persona> personas) {
         for (Persona p : personas) {
             log.debug(p);
