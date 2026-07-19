@@ -44,8 +44,28 @@ public class PruebaJPQL {
        // 3. Consulta de la persona por nombre
        jpql = "select p from Persona p where p.nombre='Karla'";
        personas = em.createQuery(jpql).getResultList();
-        mostrarPersonas(personas);
+      //  mostrarPersonas(personas);
        
+      // 4. Consulta de datos individuales, se crea un arreglo(tupla) de tipo object de 3 columnas
+      log.debug("\n4. Consulta de datos individuales se crea un arreglo(tupla) de tipo object de 3 columnas");
+      jpql = "select p.nombre as Nombre, p.apellido as Apellido, p.email as Email from Persona p";
+      iter = em.createQuery(jpql).getResultList().iterator();
+        while (iter.hasNext()) {
+            tupla = (Object[]) iter.next();
+            String nombre = (String)tupla[0];
+            String apellido = (String) tupla[1];
+            String email = (String) tupla[2];
+            log.debug("Nombre: {},Apellido: {}, Email: {}", nombre, apellido, email);
+        }
+        // Modern for-each form (do not reuse name "tupla": it is already declared above)
+//        List<Object[]> resultados = em.createQuery(jpql, Object[].class).getResultList();
+//        for (Object[] fila : resultados) {
+//            String nombre = (String) fila[0];
+//            String apellido = (String) fila[1];
+//            String email = (String) fila[2];
+//            log.debug("Nombre: {}, apellido: {}, email: {}", nombre, apellido, email);
+//        }
+        
       
     }
 
