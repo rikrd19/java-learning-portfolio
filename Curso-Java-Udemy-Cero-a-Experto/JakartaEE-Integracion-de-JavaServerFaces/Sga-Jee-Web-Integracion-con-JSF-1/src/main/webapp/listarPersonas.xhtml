@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="jakarta.faces.core"    
+      xmlns:f="jakarta.faces.core"
       xmlns:h="jakarta.faces.html"
-      xmlns:p="primefaces"
-      xmlns:ui="jakarta.faces.facelets" 
-      xmlns:c="jakarta.tags.core">
+      xmlns:p="primefaces">
     <h:head>
         <title>Listado de Personas</title>
     </h:head>
@@ -14,84 +12,133 @@
             <f:facet name="start">
                 <h:graphicImage library="images" name="ajaxloading.gif" />
             </f:facet>
-
             <f:facet name="complete">
                 <h:outputText value="" />
             </f:facet>
-
         </p:ajaxStatus>
 
-        <h:form prependId="false">
+        <h:form id="personasListForm">
             <p:growl id="messages" showDetail="true" />
 
-            <p:dataTable value="#{personaBean.personas}" var="persona" editable="true"
-                         style="width:80%" paginator="true" rows="10" stripedRows="true" >
+            <p:dataTable id="personasDataTable"
+                         value="#{personaBean.personas}"
+                         var="persona"
+                         editable="true"
+                         rowKey="#{persona.idPersona}"
+                         selection="#{personaBean.personaSeleccionada}"
+                         selectionMode="single"
+                         style="width:80%"
+                         paginator="true"
+                         rows="10"
+                         stripedRows="true">
+
                 <f:facet name="header">
                     Listado de Personas
                 </f:facet>
+
+                <p:column headerText="Id">
+                    <h:outputText value="#{persona.idPersona}" />
+                </p:column>
+
                 <p:column headerText="Nombre">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{persona.nombre}" />
                         </f:facet>
-
-                        <f:facet name="input" >
+                        <f:facet name="input">
                             <p:inputText value="#{persona.nombre}" />
                         </f:facet>
-
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Nombre">
+                <p:column headerText="Apellido">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{persona.apellido}" />
                         </f:facet>
-
-                        <f:facet name="input" >
+                        <f:facet name="input">
                             <p:inputText value="#{persona.apellido}" />
                         </f:facet>
-
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Nombre">
+                <p:column headerText="Email">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{persona.email}" />
                         </f:facet>
-
-                        <f:facet name="input" >
+                        <f:facet name="input">
                             <p:inputText value="#{persona.email}" />
                         </f:facet>
-
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Nombre">
+                <p:column headerText="Telefono">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{persona.telefono}" />
                         </f:facet>
-
-                        <f:facet name="input" >
+                        <f:facet name="input">
                             <p:inputText value="#{persona.telefono}" />
                         </f:facet>
-
                     </p:cellEditor>
                 </p:column>
 
-                <f:facet name="footer">
-                    <h:commandButton value="Regresar" action="index" />
-                </f:facet>
-
-                <p:column headerText="Opciones" style="width: 80px" >
-                    <p:rowEditor/>
+                <p:column headerText="Opciones" style="width: 80px">
+                    <p:rowEditor />
                 </p:column>
 
-                <p:ajax event="rowEdit" listener="#{personaBean.editListener}" />
+                <f:facet name="footer">
+                    <p:commandButton value="Regresar" action="index" ajax="false" />
+                    <p:spacer width="10" />
+                    <p:commandButton value="Agregar"
+                                     actionListener="#{personaBean.reiniciarPersonaSeleccionada}"
+                                     process="@this"
+                                     update=":dialogForm"
+                                     oncomplete="PF('personaDialog').show()" />
+                </f:facet>
 
-        </p:dataTable>
-    </h:form>
-</h:body>
+                <p:ajax event="rowEdit" listener="#{personaBean.editListener}" />
+            </p:dataTable>
+
+            <p:contextMenu for="personasDataTable">
+                <p:menuitem value="Eliminar"
+                            update="personasListForm:personasDataTable"
+                            icon="pi pi-times"
+                            actionListener="#{personaBean.eliminarPersona}" />
+            </p:contextMenu>
+        </h:form>
+
+        <p:dialog id="personaDialog"
+                  widgetVar="personaDialog"
+                  header="Agregar Persona"
+                  modal="true"
+                  showEffect="fade"
+                  hideEffect="fade"
+                  resizable="false"
+                  width="450">
+            <h:form id="dialogForm">
+                <p:panelGrid id="display" columns="2" layout="grid" styleClass="ui-panelgrid-blank" style="width:100%">
+                    <h:outputText value="Nombre" />
+                    <p:inputText value="#{personaBean.personaSeleccionada.nombre}" required="true" />
+
+                    <h:outputText value="Apellido" />
+                    <p:inputText value="#{personaBean.personaSeleccionada.apellido}" required="true" />
+
+                    <h:outputText value="Email" />
+                    <p:inputText value="#{personaBean.personaSeleccionada.email}" required="true" />
+
+                    <h:outputText value="Telefono" />
+                    <p:inputText value="#{personaBean.personaSeleccionada.telefono}" />
+                </p:panelGrid>
+
+                <div style="margin-top: 1rem; text-align: center;">
+                    <p:commandButton value="Guardar"
+                                     actionListener="#{personaBean.agregarPersona}"
+                                     update=":personasListForm:personasDataTable :personasListForm:messages"
+                                     oncomplete="if (!args.validationFailed) PF('personaDialog').hide();" />
+                </div>
+            </h:form>
+        </p:dialog>
+    </h:body>
 </html>
