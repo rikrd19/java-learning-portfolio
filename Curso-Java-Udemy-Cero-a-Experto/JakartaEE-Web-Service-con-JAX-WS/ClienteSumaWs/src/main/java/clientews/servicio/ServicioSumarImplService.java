@@ -17,7 +17,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 3.0
  * 
  */
-@WebServiceClient(name = "ServicioSumarImplService", targetNamespace = "http://beans.avilaswebservice/", wsdlLocation = "http://localhost:8080/SumaWS/ServicioSumarImplService?wsdl")
+@WebServiceClient(name = "ServicioSumarImplService", targetNamespace = "http://beans.avilaswebservice/", wsdlLocation = "http://localhost:8080/ServicioSumarImplService/ServicioSumarImpl?wsdl")
 public class ServicioSumarImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class ServicioSumarImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/SumaWS/ServicioSumarImplService?wsdl");
+            url = new URL("http://localhost:8080/ServicioSumarImplService/ServicioSumarImpl?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

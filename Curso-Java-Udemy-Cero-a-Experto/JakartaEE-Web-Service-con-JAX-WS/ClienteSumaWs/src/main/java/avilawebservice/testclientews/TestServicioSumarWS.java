@@ -11,7 +11,7 @@ public class TestServicioSumarWS {
         ServicioSumarWS servicioSumar = new ServicioSumarImplService().getServicioSumarImplPort();
         System.out.println("Ejecutando Servicio suma WS");
         int x = 8;
-        int y = 3;
+        int y = 7;
         int resultado = servicioSumar.sumar(x, y);
         System.out.println("Resultado: "+ resultado);
         System.out.println("Fin de servicio sumar WS");
