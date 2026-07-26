@@ -25,16 +25,30 @@ public class PersonaServiceRS {
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Persona> listarPersonas() {
-        return personaService.listarPersonas();
+    public Response listarPersonas() {
+        try {
+            return Response.ok().entity(personaService.listarPersonas()).build();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("{id}")    // esto hace referencia a /persona/{id}
-    public Persona encontrarPersonaPorId(@PathParam("id") int id) {
-        Persona persona = new Persona(id);
-        return personaService.encontrarPersonaPorId(new Persona(id));
+    public Response encontrarPersonaPorId(@PathParam("id") int id) {
+        try {
+            Persona persona = personaService.encontrarPersonaPorId(new Persona(id));
+            if (persona != null) {
+                return Response.ok().entity(persona).build();
+            } else {
+                return Response.status(Status.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 
@@ -42,13 +56,12 @@ public class PersonaServiceRS {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response agregarPersona(Persona persona) {
-        personaService.registrarPersona(persona);
         try {
+            personaService.registrarPersona(persona);
             return Response.ok().entity(persona).build();
-
         } catch (Exception e) {
             e.printStackTrace(System.out);
-            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Status.CONFLICT).build();
         }
     }
 
