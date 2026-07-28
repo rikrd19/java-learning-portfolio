@@ -2,17 +2,22 @@ package avilawebservice.servicio;
 
 import avilawebservice.datos.IPersonaDao;
 import avilawebservice.domain.Persona;
+import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import jakarta.jws.WebService;
 import java.util.List;
 
 @Stateless
-public class PersonaServiceImpl implements IPersonaService{
+@WebService(endpointInterface = "avilawebservice.servicio.PersonaServiceWs")
+@DeclareRoles({"ROLE_ADMIN", "ROLE_USER"})
+@RolesAllowed({"ROLE_ADMIN", "ROLE_USER"})
+public class PersonaServiceImpl implements PersonaServiceRemote, IPersonaService, PersonaServiceWs {
 
     @Inject
     private IPersonaDao personaDao;
-    
-    
+
     @Override
     public List<Persona> listarPersonas() {
         return personaDao.findAllPersonas();
@@ -39,6 +44,7 @@ public class PersonaServiceImpl implements IPersonaService{
     }
 
     @Override
+    @RolesAllowed("ROLE_ADMIN")
     public void eliminarPersona(Persona persona) {
         personaDao.deletePersona(persona);
     }

@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,18 +37,22 @@ public class Persona implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_persona")
     private Integer idPersona;
+    @Column(name = "nombre")
     @Size(max=45)
     private String nombre;
+    @Column(name = "apellido")
     @Size(max=45)
     private String apellido;
+    @Column(name = "email")
     @Size(max=45)
     private String email;
+    @Column(name = "telefono")
     @Size(max=45)
     private String telefono;
 
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
-    private List<Usuario> usuarioList;
+    private List<Usuario> usuarioList = new ArrayList<>();
            
     // Constructores
     public Persona() {

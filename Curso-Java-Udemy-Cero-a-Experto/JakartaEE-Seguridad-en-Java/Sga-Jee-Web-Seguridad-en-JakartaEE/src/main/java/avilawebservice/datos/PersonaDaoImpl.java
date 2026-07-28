@@ -10,7 +10,7 @@ import java.util.List;
 @Stateless
 public class PersonaDaoImpl implements IPersonaDao {
     
-    @PersistenceContext(unitName = "SgaPU")
+    @PersistenceContext(unitName = "SGAPU")
     EntityManager em;
     
     @Override

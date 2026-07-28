@@ -20,18 +20,28 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Jakarta Persistence API (replaces javax.persistence) -->
+        <!-- Jakarta Persistence API -->
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
         
-        <!-- EclipseLink JPA provider with Jakarta support (4.x) -->
+        <!-- EclipseLink JPA provider (GlassFish ya lo incluye) -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>4.0.4</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Jakarta Web Services Metadata API (jakarta.jws.WebService) -->
+        <dependency>
+            <groupId>jakarta.jws</groupId>
+            <artifactId>jakarta.jws-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
         </dependency>
         
         <!-- MySQL JDBC driver -->

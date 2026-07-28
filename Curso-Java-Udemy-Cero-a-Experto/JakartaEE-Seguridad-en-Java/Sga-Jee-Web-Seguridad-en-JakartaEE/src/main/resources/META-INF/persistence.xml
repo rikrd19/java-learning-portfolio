@@ -4,18 +4,24 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
                                  https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 
-    <!-- JTA is required for @PersistenceContext in EJBs on GlassFish -->
-    <persistence-unit name="SgaPU" transaction-type="JTA">
-        <jta-data-source>jdbc/PersonaDb</jta-data-source>
+    <!-- persistence-unit name = alias used in Java: Persistence.createEntityManagerFactory("SgaPU") -->
+    <persistence-unit name="SGAPU" transaction-type="JTA">
+        <!-- EclipseLink provider (from the pom dependency) -->
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <!-- Required in Java SE: list entities (classpath scan is not reliable) -->
+        <jta-data-source>jdbc/SgaDS</jta-data-source>
 
         <class>avilawebservice.domain.Persona</class>
         <class>avilawebservice.domain.Usuario</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
+            <!-- EclipseLink logging: less verbose, show only SQL with bound parameters -->
             <property name="eclipselink.logging.level" value="WARNING"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
+            <!-- Tables already exist: do not recreate FKs on every run -->
             <property name="eclipselink.ddl-generation" value="none"/>
         </properties>
     </persistence-unit>
