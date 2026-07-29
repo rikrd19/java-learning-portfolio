@@ -14,7 +14,7 @@
         <servlet-name>JerseyWebApplication</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
-            <param-name>Jersey.config.server.provider.packages</param-name>
+            <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>avilawebservice.servicio</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>

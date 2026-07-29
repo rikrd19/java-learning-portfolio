@@ -14,7 +14,7 @@ public class ClientePersonaSevice {
         System.out.println("Iniciando llamada al EJB desde el cliente");
 
         String authFile = "login.conf";
-        System.setProperty("java.security.auth.login.config", new java.io.File(authFile).getAbsolutePath());
+        System.setProperty("java.security.auth.login.config",authFile);
         ProgrammaticLogin programmaticLogin = new ProgrammaticLogin();
         programmaticLogin.login("admin", "admin".toCharArray());
 
