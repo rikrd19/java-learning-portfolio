@@ -1,0 +1,4 @@
+
+default{
+com.sun.enterprice.security.auth.login.ClientPasswordLoginModule required;
+};

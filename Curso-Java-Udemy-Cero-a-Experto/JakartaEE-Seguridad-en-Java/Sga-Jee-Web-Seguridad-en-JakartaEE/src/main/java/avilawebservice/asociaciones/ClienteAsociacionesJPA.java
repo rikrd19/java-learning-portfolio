@@ -26,9 +26,6 @@ public class ClienteAsociacionesJPA {
         // Imprimir los objetos de tipo persona
         for (Persona persona : personas) {
             log.debug("Persona: " + persona);
-            for (Usuario usuario : persona.getUsuarioList()) {
-                log.debug("Usuario: " + usuario);
-            }
         }
     }
 }

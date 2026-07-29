@@ -1,7 +1,6 @@
 package avilawebservice.domain;
 
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,15 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -51,10 +47,6 @@ public class Persona implements Serializable {
     @Size(max = 45)
     private String telefono;
 
-    @XmlTransient
-    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
-    private List<Usuario> usuarioList;
-
     // Constructores
     public Persona() {
     }
@@ -76,14 +68,6 @@ public class Persona implements Serializable {
 
     public void setIdPersona(Integer idPersona) {
         this.idPersona = idPersona;
-    }
-
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
     }
 
     public String getNombre() {
