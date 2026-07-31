@@ -9,7 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.jws.WebService;
 import java.util.List;
 
-@Stateless
+@Stateless(mappedName = "PersonaServiceImpl")
 @WebService(endpointInterface = "avilawebservice.servicio.PersonaServiceWs")
 @DeclareRoles({"ROLE_ADMIN", "ROLE_USER"})
 @RolesAllowed({"ROLE_ADMIN", "ROLE_USER"})

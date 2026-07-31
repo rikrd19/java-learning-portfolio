@@ -7,7 +7,7 @@ import jakarta.inject.Inject;
 import avilawebservice.datos.UsuarioDao;
 import avilawebservice.domain.Usuario;
 
-@Stateless
+@Stateless(mappedName = "UsuarioServiceImpl")
 public class UsuarioServiceImpl implements UsuarioServiceRemote, UsuarioService{
 
     @Inject
