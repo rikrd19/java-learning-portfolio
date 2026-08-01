@@ -1,6 +1,6 @@
 package test;
 
-import avilawebservice.PersonaDAO;
+import avilawebservice.dao.PersonaDAO;
 import avilawebservice.domain.Persona;
 
 public class OperacionesHibernateJPA {

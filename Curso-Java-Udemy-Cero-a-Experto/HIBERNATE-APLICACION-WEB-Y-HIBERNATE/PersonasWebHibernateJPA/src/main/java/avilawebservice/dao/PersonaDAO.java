@@ -1,4 +1,4 @@
-package avilawebservice;
+package avilawebservice.dao;
 
 import avilawebservice.domain.Persona;
 import jakarta.persistence.EntityManager;
@@ -18,11 +18,12 @@ public class PersonaDAO {
 
     }
 
-    public void listar() {
+    public List<Persona> listar() {
         String hql = "SELECT p FROM Persona p";
         Query query = em.createQuery(hql);
         List<Persona> personas = query.getResultList();
-        personas.forEach(p -> System.out.println("p: " + p));
+//        personas.forEach(p -> System.out.println("p: " + p));
+        return personas;
     }
 
     public void insertar(Persona persona) {
@@ -48,15 +49,15 @@ public class PersonaDAO {
         } catch (Exception e) {
             e.printStackTrace(System.out);
             em.getTransaction().rollback();
-        } 
+        }
 //        finally {
 //            if (em != null) {
 //                em.close();  // se comenta para que no cierre el objeto em y poder seguir trabajando
 //            }
     }
-    
-    public Persona buscarPersonaPorId(Persona p){
-       return em.find(Persona.class, p.getIdPersona());
-        
+
+    public Persona buscarPersonaPorId(Persona p) {
+        return em.find(Persona.class, p.getIdPersona());
+
     }
 }
