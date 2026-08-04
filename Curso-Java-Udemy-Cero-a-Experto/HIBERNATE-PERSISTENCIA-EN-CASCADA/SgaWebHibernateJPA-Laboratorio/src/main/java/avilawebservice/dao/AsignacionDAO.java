@@ -23,11 +23,12 @@ public class AsignacionDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void actualizar(Asignacion asignacion) {
@@ -38,11 +39,12 @@ public class AsignacionDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void eliminar(Asignacion asignacion) {
@@ -53,14 +55,15 @@ public class AsignacionDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
-    public Object buscarPorId(Asignacion asignacion) {
+    public Asignacion buscarPorId(Asignacion asignacion) {
         em = getEntityManager();
         return em.find(Asignacion.class, asignacion.getIdAsignacion());
     }

@@ -22,11 +22,12 @@ public class ContactoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void actualizar(Contacto contacto) {
@@ -37,11 +38,12 @@ public class ContactoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
 
     }
 
@@ -53,14 +55,15 @@ public class ContactoDAO extends GenericDAO {
         em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
     
-    public Object buscarPorId(Contacto contacto){
+    public Contacto buscarPorId(Contacto contacto){
         em = getEntityManager();
        return em.find(Contacto.class, contacto.getIdContacto());
     }

@@ -23,11 +23,12 @@ public class CursoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void actualizar(Curso curso) {
@@ -38,11 +39,12 @@ public class CursoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void eliminar(Curso curso) {
@@ -53,14 +55,15 @@ public class CursoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
-    public Object buscarPorId(Curso curso) {
+    public Curso buscarPorId(Curso curso) {
         em = getEntityManager();
         return em.find(Curso.class, curso.getIdCurso());
     }

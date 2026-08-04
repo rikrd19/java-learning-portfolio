@@ -23,11 +23,12 @@ public class DomicilioDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void actualizar(Domicilio domicilio) {
@@ -38,11 +39,12 @@ public class DomicilioDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 
     public void eliminar(Domicilio domicilio) {
@@ -53,15 +55,16 @@ public class DomicilioDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
+//        finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
 
     }
     
-    public Object buscarPorId(Domicilio domicilio){
+    public Domicilio buscarPorId(Domicilio domicilio){
         em = getEntityManager();
         return em.find(Domicilio.class, domicilio.getIdDomicilio());
     }

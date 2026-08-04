@@ -1,4 +1,4 @@
-package avilawebservices.servicio;
+package avilawebservice.servicio;
 
 import avilawebservice.dao.PersonaDAO;
 import avilawebservice.domain.Persona;
