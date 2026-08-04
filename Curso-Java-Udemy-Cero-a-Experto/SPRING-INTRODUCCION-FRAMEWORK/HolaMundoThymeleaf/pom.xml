@@ -51,8 +51,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
-            <optional>true</optional>
+            <version>1.18.34</version>
+            <scope>provided</scope>
         </dependency>
         <!--Test-->
         <dependency>
@@ -111,6 +111,11 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-Xlint</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
