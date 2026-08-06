@@ -17,6 +17,12 @@
                 <a th:href="@{/(lang=en)}">EN</a>
             
             <span>[[#{plantilla.pie-pagina}]] <a href="http://www.avilawebservice" target="_blank" />AvilaWebService</span>
+            <br/>
+            <br/>
+            <form method="POST" th:action="@{/logout}">
+                <!--Tambien se puede usar un boton de tipo submit-->
+                <a href="#" onclick="this.parentNode.submit();">Logout</a>
+            </form>
             </div>
         </footer>
     </body>
