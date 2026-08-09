@@ -21,6 +21,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/editar/**", "/agregar/**", "/eliminar/**").hasRole("ADMIN")
                 .requestMatchers("/").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
@@ -30,11 +31,7 @@ public class SecurityConfig {
                      .failureUrl("/login?error=true")
                     .permitAll()
                 )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .deleteCookies("JSESSIONID")
-                        .permitAll()
+                .logout(logout -> logout.permitAll()
                 )
                 .exceptionHandling(exception -> exception
                     .accessDeniedPage("/errores/403") // Pagina personalizada para 403
