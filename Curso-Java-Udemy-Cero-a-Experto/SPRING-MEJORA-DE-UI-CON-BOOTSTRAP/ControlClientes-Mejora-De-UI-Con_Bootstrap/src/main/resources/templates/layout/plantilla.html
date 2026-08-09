@@ -29,7 +29,7 @@
                             <li class="nav-item mr-3">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-user"></i>
-                                    <span th:text="#{barra.bienvenido}">Bienvenido</span>
+                                    <span th:text="#{barra.bienvenido}">Bienvenido:</span>
                                     <span sec:authentication="name">Usuario</span>
                                 </a>
                             </li>
@@ -44,26 +44,32 @@
                     </div>
                 </div>
             </nav>
+            <section id="main-header" class="py-2 bg-info text-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-med-6">
+                            <h1>
+                                <i class="fas fa-cog"></i> [[#{plantilla.titulo}]]
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </header>
 
-    <footer th:fragment="footer">
-        <div>
-            <br/>
-            <a th:href="@{/(lang=es)}">ES</a> |
-            <a th:href="@{/(lang=en)}">EN</a> |
+        <footer th:fragment="footer" class="bg-warning text-white mt-5 p-5">
+            <div class="container">
+                <div class="col">
+                    <p class="lead text-center" >
+                        <a th:href="@{/(lang=es)}">ES</a> |
+                        <a th:href="@{/(lang=en)}">EN</a> |
+                        <span>[[#{plantilla.pie-pagina}]] &copy; <a href="http://www.avilawebservice" target="_blank" />AvilaWebService</span>
+                    </p>
+                </div>
+                <br/>
+                <br/>
 
-            <span>[[#{plantilla.pie-pagina}]] <a href="http://www.avilawebservice" target="_blank" />AvilaWebService</span>
-            <br/>
-            <br/>
-            <form method="POST" th:action="@{/logout}">
-                <b>User: </b> <span sec:authentication="name">Usuario que hizo loggin</span>
-                <b>Roles: </b> <span sec:authentication="principal.authorities">Roles</span>
-                <br/>
-                <br/>
-                <!--Tambien se puede usar un boton de tipo submit-->
-                <a href="#" onclick="this.parentNode.submit();">Logout</a>
-            </form>
-        </div>
-    </footer>
-</body>
+            </div>
+        </footer>
+    </body>
 </html>
