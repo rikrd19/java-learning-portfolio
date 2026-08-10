@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -30,8 +31,10 @@ public class Persona implements Serializable{
     private String email;
     
     private String telefono;
-
     
+    @NotNull
+    private Double saldo;
+
     
     
     public Persona() {
@@ -75,6 +78,14 @@ public class Persona implements Serializable{
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 
     

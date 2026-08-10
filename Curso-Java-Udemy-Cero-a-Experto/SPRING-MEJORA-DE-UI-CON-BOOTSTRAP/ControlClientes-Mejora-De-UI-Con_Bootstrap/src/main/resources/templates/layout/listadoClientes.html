@@ -3,11 +3,49 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>Inicio</title>
+        <title>Listado Clientes</title>
         <meta charset="UTF-8"/>
     </head>
-    
+
     <body>
-        <div>TODO write content</div>
+        <section th:fragment="listadoClientes" id="clientes">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{persona.titulo-lista}]]</h4>
+                            </div>
+                            <div th:if="${personas != null and !personas.empty}">
+                                <table class="table table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="#{persona.nombre}">Nombre</th>
+                                            <th th:text="#{persona.saldo}">Saldo</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="persona, contador : ${personas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${persona.nombre + ' ' + persona.apellido}]]</td>
+                                            <td>[[${#numbers.formatDecimal(persona.saldo, 1, 2)}]]</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${persona.idPersona}"
+                                                   class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </body>
 </html>
