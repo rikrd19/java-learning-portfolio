@@ -31,16 +31,47 @@
                                         <tr th:each="persona, contador : ${personas}">
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${persona.nombre + ' ' + persona.apellido}]]</td>
+                                            <!-- 1. Simple (sin símbolo) unidad en thymeleaf -->
                                             <td>[[${#numbers.formatDecimal(persona.saldo, 1, 2)}]]</td>
+                                            <!--/* 2. Con símbolo fijo ($): Thymeleaf 3.1 no permite new DecimalFormat (bloquea java.*) es mejor hacer un metodo util */-->
+                                            <!--/* 3. Con internacionalización (moneda local): #numbers.formatCurrency(persona.saldo) es mejor hacer un metodo util */-->
                                             <td>
                                                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${persona.idPersona}"
                                                    class="btn btn-secondary">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
                                                 </a>
                                             </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar(idPersona=${persona.idPersona})}"
+                                                   class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${personas == null or personas.empty}">
+                                <span th:text="#{persona.lista-vacia}">Lista vacia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-danger text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.saldoTotal}">Saldo Total</h3>
+                                <h4 class="display-4">
+                                    [[${#numbers.formatDecimal(saldoTotal, 1, 2)}]]
+                                </h4>
+                            </div>
+                        </div>
+
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.totalClientes}">Total Clientes</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-users"></i> [[${totalCliente}]]
+                                </h4>
                             </div>
                         </div>
                     </div>
