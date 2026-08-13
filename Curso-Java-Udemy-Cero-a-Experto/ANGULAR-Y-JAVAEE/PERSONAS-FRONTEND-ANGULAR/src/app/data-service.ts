@@ -4,13 +4,13 @@ import { Observable } from "rxjs";
 import { Persona } from "./persona.model";
 
 
-@Injectable({ providedIn: 'root' }) // El servicio se registra automáticamente en el inyector raíz de la aplicación.
+@Injectable({
+    providedIn: 'root'
+}) // El servicio se registra automáticamente en el inyector raíz de la aplicación.
 export class DataService {
-    constructor(private httpClient: HttpClient) { }
-
-
     urlBase = 'http://localhost:8080/Personas-Backend-Java/webservice/personas';
 
+    constructor(private httpClient: HttpClient) { }
 
     cargarPersonas(): Observable<Persona[]> {
         return this.httpClient.get<Persona[]>(this.urlBase);
@@ -22,31 +22,35 @@ export class DataService {
     }
 
 
-    modificarPersona(idPersona: number, persona: Persona) {
+    modificarPersona(idPersona: number, persona: Persona): Observable<Persona> {
         let url: string;
         url = this.urlBase + '/' + idPersona;
-        this.httpClient.put<Persona>(url, persona)
+        // this.httpClient.put<Persona>(url, persona)
 
-            .subscribe({        // <--  RxJS 7+ recomienda el objeto Observer con next y error.
-                next: (response) => {      // <-- Función que se ejecuta cuando la petición es exitosa.
-                    console.log('resultado modificar persona: ' + response);
-                },
-                error: (error) => console.log('Error en modificar persona: ' + error)  // <-- Función que se ejecuta cuando la petición falla.
-            });
+        // .subscribe({        // <--  RxJS 7+ recomienda el objeto Observer con next y error.
+        //     next: (response) => {      // <-- Función que se ejecuta cuando la petición es exitosa.
+        //         console.log('resultado modificar persona: ' + response);
+        //     },
+        //     error: (error) => console.log('Error en modificar persona: ' + error)  // <-- Función que se ejecuta cuando la petición falla.
+        // });
+
+        return this.httpClient.put<Persona>(url, persona);
     }
 
 
-    eliminarPersona(idPersona: number) {
-        let url: string;
-        url = this.urlBase + '/' + idPersona;
-        this.httpClient.delete<Persona>(url)
-            .subscribe({                 // <--  RxJS 7+ recomienda el objeto Observer con next y error.
-                next: (response) => {    // <-- Función que se ejecuta cuando la petición es exitosa.
-                    console.log('resultado eliminar persona: ' + response);
-                },
-                error: (error) => console.log('Error en eliminar persona: ' + error)   // <-- Función que se ejecuta cuando la petición falla.
-            });
+    eliminarPersona(idPersona: number): Observable<void> {
+        // let url: string;
+        // url = this.urlBase + '/' + idPersona;
+        // this.httpClient.delete<Persona>(url)
+        // .subscribe({                 // <--  RxJS 7+ recomienda el objeto Observer con next y error.
+        //     next: (response) => {    // <-- Función que se ejecuta cuando la petición es exitosa.
+        //         console.log('resultado eliminar persona: ' + response);
+        //     },
+        //     error: (error) => console.log('Error en eliminar persona: ' + error)   // <-- Función que se ejecuta cuando la petición falla.
+        // });
 
+        const url = `${this.urlBase}/${idPersona}`;
+        return this.httpClient.delete<void>(url);
 
     }
 }

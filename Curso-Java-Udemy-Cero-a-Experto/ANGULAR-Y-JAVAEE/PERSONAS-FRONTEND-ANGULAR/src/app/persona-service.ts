@@ -2,16 +2,21 @@ import { Injectable } from "@angular/core";
 import { Persona } from "./persona.model";
 import { DataService } from "./data-service";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PersonaService {
-
     personas: Persona[] = [];
 
     constructor(private dataservice: DataService) { }
 
     // Se usa para modificar el valor del arreglo debido ala llamada asincrona
     setPersonas(personas: Persona[]) {
-        this.personas = this.personas;
+        this.personas = personas;
+    }
+
+    obtenerPersonas() {
+        return this.dataservice.cargarPersonas();
     }
 
     agregarPersona(persona: Persona) {
@@ -38,8 +43,18 @@ export class PersonaService {
 
     modificarPersona(id: number, persona: Persona) {
         console.log('persona a modificar: ' + persona.idPersona);
-        this.dataservice.modificarPersona(id, persona);
-
+        this.dataservice.modificarPersona(id, persona)
+            .subscribe({
+                next: (personaModificada: Persona) => {
+                    //Buscar y acturalizar el arreglo local
+                    const index = this.personas.findIndex(p => p.idPersona === id);
+                    if (index != -1) {
+                        this.personas[index] = personaModificada;
+                        console.log('Persona modificada en arreglo local');
+                    }
+                },
+                error: (error) => console.error('Error al modificar persona:', error)
+            });
     }
 
     eliminarPersona(id: number) {
