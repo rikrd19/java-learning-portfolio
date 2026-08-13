@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { NgForOf } from "@angular/common";
 import { PersonaService } from '../persona-service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterOutlet } from '@angular/router';
 import { Persona } from '../persona.model';
 
 @Component({
   selector: 'app-personas',
-  imports: [NgForOf],
+  standalone: true,
+  imports: [NgForOf, RouterOutlet],
   templateUrl: './personas.component.html',
   styles: ``
 })
@@ -29,6 +30,11 @@ export class PersonasComponent {
           console.log('personas obtenidas del suscriber: ' + this.personas);
         }
       });
+  }
+
+  irAgregar() {
+    console.log('nos vamos a agregar');
+    this.router.navigate(['/formulario']);
   }
 
 }
