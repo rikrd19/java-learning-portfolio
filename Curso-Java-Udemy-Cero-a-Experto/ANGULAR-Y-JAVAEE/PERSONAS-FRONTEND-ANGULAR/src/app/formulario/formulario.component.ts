@@ -54,4 +54,15 @@ export class FormularioComponent implements OnInit, OnDestroy {
       error: (error) => console.error('Error al guardar:', error)
     });
   }
+
+  onEliminarPersona() {
+    if (this.idPersona <= 0) {
+      return;  // sin un id real no hay nada que eliminar
+    }
+
+    this.personaService.eliminarPersona(this.idPersona).subscribe({
+      next: () => this.router.navigate(['personas']),
+      error: (error) => console.error('Error al eliminar:', error)
+    });
+  }
 }

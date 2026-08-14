@@ -38,10 +38,7 @@ export class PersonaService {
         return this.dataservice.modificarPersona(id, persona);
     }
 
-    eliminarPersona(id: number) {
-        console.log('eliminar persona con id: ' + id);
-        const index = this.personas.findIndex(persona => persona.idPersona == id); // encontramos el indice en el arreglo
-        this.personas.splice(index, 1);
-        this.dataservice.eliminarPersona(id);
+    eliminarPersona(id: number): Observable<void> {
+        return this.dataservice.eliminarPersona(id);
     }
 } 
