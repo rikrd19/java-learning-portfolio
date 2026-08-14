@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <!-- persistence-unit name = alias used in Java: Persistence.createEntityManagerFactory("SgaPU") -->
+    <persistence-unit name="SgaPU" transaction-type="RESOURCE_LOCAL">
+        <!-- EclipseLink provider (from the pom dependency) -->
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <!-- Required in Java SE: list entities (classpath scan is not reliable) -->
+        <class>avilawebservice.domain.Persona</class>
+        <class>avilawebservice.domain.Usuario</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <!-- JDBC: standard keys defined by the Jakarta Persistence spec -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="curso*123"/>
+
+            <!-- EclipseLink logging: less verbose, show only SQL with bound parameters -->
+            <property name="eclipselink.logging.level" value="WARNING"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <!-- Tables already exist: do not recreate FKs on every run -->
+            <property name="eclipselink.ddl-generation" value="none"/>
+        </properties>
+    </persistence-unit>
+</persistence>

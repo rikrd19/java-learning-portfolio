@@ -1,0 +1,5 @@
+1, Papas, 7.0
+2, Refresco, 5.0
+3, Sandwich, 12.0
+4, Chocolate, 10.0
+5, Nachos, 3.0

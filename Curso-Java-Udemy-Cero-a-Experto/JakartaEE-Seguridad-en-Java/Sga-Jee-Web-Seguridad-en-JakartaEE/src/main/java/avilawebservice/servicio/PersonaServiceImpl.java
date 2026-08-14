@@ -1,0 +1,52 @@
+package avilawebservice.servicio;
+
+import avilawebservice.datos.IPersonaDao;
+import avilawebservice.domain.Persona;
+import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.jws.WebService;
+import java.util.List;
+
+@Stateless(mappedName = "PersonaServiceImpl")
+@WebService(endpointInterface = "avilawebservice.servicio.PersonaServiceWs")
+@DeclareRoles({"ROLE_ADMIN", "ROLE_USER"})
+@RolesAllowed({"ROLE_ADMIN", "ROLE_USER"})
+public class PersonaServiceImpl implements PersonaServiceRemote, IPersonaService, PersonaServiceWs {
+
+    @Inject
+    private IPersonaDao personaDao;
+
+    @Override
+    public List<Persona> listarPersonas() {
+        return personaDao.findAllPersonas();
+    }
+
+    @Override
+    public Persona encontrarPersonaPorId(Persona persona) {
+        return personaDao.findPersonaById(persona);
+    }
+
+    @Override
+    public Persona encontrarPersonaPorEmail(Persona persona) {
+        return personaDao.findPersonaByEmail(persona);
+    }
+
+    @Override
+    public void registrarPersona(Persona persona) {
+        personaDao.insertPersona(persona);
+    }
+
+    @Override
+    public void modificarPersona(Persona persona) {
+        personaDao.updatePersona(persona);
+    }
+
+    @Override
+    @RolesAllowed("ROLE_ADMIN")
+    public void eliminarPersona(Persona persona) {
+        personaDao.deletePersona(persona);
+    }
+
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!-- DÓNDE escribir (consola, archivo, etc.) el log -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>[%thread] %-5level: %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- QUIÉN y con qué nivel (por paquete/clase) se silencian los logs de Hibernate, HikariCP y Spring Boot -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+
+    <!--Regla global por defecto: Raíz única: nivel info para tu aplicación -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+<!--      **** No pueden haber dos roots, uno sera ignorado ***-->
+<!--    <root level="warn">-->
+<!--        <appender-ref ref="STDOUT"/>-->
+<!--    </root>-->
+
+</configuration>

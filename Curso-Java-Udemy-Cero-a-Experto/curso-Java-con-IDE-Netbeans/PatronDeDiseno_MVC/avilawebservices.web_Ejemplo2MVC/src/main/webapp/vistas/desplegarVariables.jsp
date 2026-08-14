@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Despliegue de Variables</title>
+    </head>
+    <body>
+        <h1>Despliegue de Variables</h1>
+        Variable en alcance request: ${mensaje}
+        <br/><br/>
+        Variable en alcance de sesion:
+        <br/>
+        <ul>
+            Rectangulo: 
+            <li>Base: ${rectangulo.base}</li>
+            <li>Altura: ${rectangulo.altura}</li>
+            <li>Area: ${rectangulo.area}</li>
+        </ul>
+        <br/>
+        <a href="${pageContext.request.contextPath}/index.jsp">Regresar a inicio</a>
+    </body>
+</html>

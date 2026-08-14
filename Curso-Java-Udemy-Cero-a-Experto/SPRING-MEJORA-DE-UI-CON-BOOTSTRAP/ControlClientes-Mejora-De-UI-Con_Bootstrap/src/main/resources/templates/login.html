@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Login</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+
+        <section id="actions" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <!--se pueden agregar botones -->
+                </div>
+            </div>
+        </section>
+
+        <section id="login">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Login</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" th:action="@{/login}">
+                                    <div class="form-group">
+                                        <label for="username">Username:</label>
+                                        <input type="text" name="username" id="username"/>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <label for="password">Password:</label>
+                                        <input type="password" name="password" id="password"/>
+                                    </div>
+
+                                    <input type="submit" value="Login" class="btn btn-primary btn-block"/>
+                                    <div class="form-group">
+                                        <!--Mensaje generico de error de credenciales-->
+                                        <div th:if="${param.error}" class="alert alert-danger">
+                                            <h3>Usuario o contraseñas incorrectos. Intente nuevamente.</h3>
+                                        </div>
+                                        <br/>
+                                        <!--Mensaje de logout exitoso-->
+                                        <div th:if="${param.logout}" class="alert alert-success">
+                                            <h3>Has cerrado sesión correctamente.</h3>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+
+    </body>
+</html>

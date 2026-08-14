@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Bolsa de Trabajo V1</title>
+        <h:outputStylesheet library="css" name="styles.css" />
+    </h:head>
+    <h:body>
+        <div id="wrapper">
+            <div id="header-wrapper">
+                <ui:insert name="top">
+                    <div id="header">
+                        <div id="logo">
+                            <h1>Bolsa de Trabajo</h1>
+                        </div>
+                    </div>
+                </ui:insert>
+            </div>
+            <div id="page">
+                <ui:insert name="content">Contenido</ui:insert>
+            </div>
+
+            <br/>
+
+            <div id="footer">
+                <br/>
+                <ui:insert name="bottom">
+                    Derechos Reservados - AvilaWebService.com.es - Catalunya
+                </ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>

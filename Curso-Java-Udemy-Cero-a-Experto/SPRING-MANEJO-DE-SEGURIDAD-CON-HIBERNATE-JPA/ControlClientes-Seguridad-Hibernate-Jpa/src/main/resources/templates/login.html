@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h1>Login</h1>
+        
+        <form method="POST" th:action="@{/login}">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username"/>
+            <br/>
+            <br/>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password"/>
+            <br/>
+            <br/>
+            <input type="submit" value="Login"/>
+            
+            <br/>
+            <!--Mensaje generico de error de credenciales-->
+            <div th:if="${param.error}" class="alert alert-danger">
+                <h3>Usuario o contraseñas incorrectos. Intente nuevamente.</h3>
+            </div>
+            
+            <br/>
+            <!--Mensaje de logout exitoso-->
+            <div th:if="${param.logout}" class="alert alert-success">
+                <h3>Has cerrado sesión correctamente.</h3>
+            </div>
+        </form>
+    </body>
+</html>
