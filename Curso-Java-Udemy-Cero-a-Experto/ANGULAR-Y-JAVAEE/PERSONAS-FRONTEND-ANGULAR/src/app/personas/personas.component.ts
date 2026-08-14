@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForOf } from "@angular/common";
 import { PersonaService } from '../persona-service';
-import { ActivatedRoute, Route, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Persona } from '../persona.model';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-personas',
   standalone: true,
-  imports: [NgForOf, RouterOutlet],
+  imports: [NgForOf, RouterLink, RouterOutlet],
   templateUrl: './personas.component.html',
   styles: ``
 })
-export class PersonasComponent {
+export class PersonasComponent implements OnInit, OnDestroy {
 
   personas: Persona[] = [];
+  private subscripcionRouter!: Subscription;
 
   constructor(private personaService: PersonaService,
     private router: Router,
@@ -21,20 +23,35 @@ export class PersonasComponent {
   }
 
   ngOnInit(): void {
-    this.personaService.obtenerPersonas()
-      .subscribe({
-        next: (personasObtnidas: Persona[]) => {
-          //cargamos los datos de persona obtenidos en el arreglo local
-          this.personas = personasObtnidas;
-          this.personaService.setPersonas(this.personas);
-          console.log('personas obtenidas del suscriber: ' + this.personas);
+    this.cargarPersonas();
+
+    // Al volver desde la ruta del formulario, este componente se reutiliza
+    // y ngOnInit no se ejecuta de nuevo, por lo que recargamos la lista aquí.
+    this.subscripcionRouter = this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        if (event.url === '/personas') {
+          this.cargarPersonas();
         }
       });
   }
 
-  irAgregar() {
-    console.log('nos vamos a agregar');
-    this.router.navigate(['/formulario']);
+  ngOnDestroy() {
+    this.subscripcionRouter.unsubscribe();
   }
 
+  cargarPersonas() {
+    this.personaService.obtenerPersonas()
+      .subscribe({
+        next: (personasObtenidas: Persona[]) => {
+          this.personas = personasObtenidas;
+          this.personaService.setPersonas(this.personas);
+        },
+        error: (error) => console.error('Error al cargar personas:', error)
+      });
+  }
+
+  irAgregar() {
+    this.router.navigate(['/personas/agregar']);
+  }
 }

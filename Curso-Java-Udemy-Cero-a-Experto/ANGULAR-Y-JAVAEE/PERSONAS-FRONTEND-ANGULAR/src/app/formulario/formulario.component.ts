@@ -1,22 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PersonaService } from '../persona-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Persona } from '../persona.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
   imports: [CommonModule, FormsModule],      // para usar ngModel, *ngIf, etc.
   templateUrl: './formulario.component.html',
-  styles: ``
+  styles: []
 })
-export class FormularioComponent implements OnInit {
+export class FormularioComponent implements OnInit, OnDestroy {
 
   idPersona: number = 0;
   nombreInput: string = '';
-
+  private subscripcionParams!: Subscription;
 
   constructor(private personaService: PersonaService,
     private router: Router,
@@ -24,12 +25,33 @@ export class FormularioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.subscripcionParams = this.route.params.subscribe((params: Params) => {
+      this.idPersona = Number(params['idPersona'] || 0);
+      this.nombreInput = '';  // resetea el formulario para la sgte entrada 
 
+      if (this.idPersona > 0) {
+        const persona = this.personaService.encontrarPersona(this.idPersona);
+        if (persona) {
+          this.nombreInput = persona.nombre;
+        }
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscripcionParams.unsubscribe();
   }
 
   onGuardarPersona() {
     const personaAGuardar = new Persona(this.idPersona, this.nombreInput);
-    this.personaService.agregarPersona(personaAGuardar);
-    this.router.navigate(['personas']);
+
+    const operacion = this.idPersona > 0
+      ? this.personaService.modificarPersona(this.idPersona, personaAGuardar)
+      : this.personaService.agregarPersona(personaAGuardar);
+
+    operacion.subscribe({
+      next: () => this.router.navigate(['personas']),
+      error: (error) => console.error('Error al guardar:', error)
+    });
   }
 }
